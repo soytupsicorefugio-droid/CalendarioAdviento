@@ -1,26 +1,39 @@
 {
-  "1": "Un pequeño saludo para comenzar: abre este día y respira — algo bonito te espera.",
-  "2": "Hoy hay una melodía para la tarde; imagina una canción que calme los vientos y acompaña tu taza favorita.",
-  "3": "Sorpresa visual: reemplaza por una imagen acogedora (por ejemplo `resources/sorpresa.png`).",
-  "4": "Un consejo sencillo para mejorar tus días: guarda un minuto para mirar por la ventana.",
-  "5": "Receta rápida: una idea sencilla para compartir calor en casa (puedes enlazar un PDF o página).",
-  "6": "Pequeño desafío: hoy busca algo que te haga sonreír y compártelo con alguien.",
-  "7": "Un fragmento para inspirar: ‘Lo simple se vuelve memorable cuando hay intención’.",
-  "8": "Pista escondida: un enlace o ruta en la web que conduce a una sorpresa (ejemplo: /sorpresa).",
-  "9": "Carta breve: escribe una nota de gratitud a alguien y guarda la sensación.",
-  "10": "Mini-relato: una historia muy corta que despierte curiosidad — ideal para personalizar.",
-  "11": "Playlist de ejemplo: comparte canciones para tardes lentas o mañanas brillantes.",
-  "12": "Descarga útil: sube aquí un pequeño recurso (lista de recetas, fondo de pantalla, etc.).",
-  "13": "Detrás de escena: una anécdota breve sobre cómo nació la idea de esta plantilla.",
-  "14": "Una foto escondida: indica dónde encontrar una imagen dentro de `resources/`.",
-  "15": "Pausa consciente: cierra los ojos 30 segundos y recuerda tres cosas por las que estás agradecido.",
-  "16": "Juego corto: un acertijo sencillo cuya respuesta desbloquea una curiosidad en la web.",
-  "17": "Regalo digital: enlace a un archivo pequeño (ej. fondo, sticker o PDF sorpresa).",
-  "18": "Encuesta amable: pide una opinión rápida para conocer mejor a tu audiencia.",
-  "19": "Carta al futuro: escribe una frase que quieras recordar dentro de un año.",
-  "20": "Momento musical: sugiere una canción para cerrar el día con calma.",
-  "21": "Evento en vivo (ejemplo): enlace a una transmisión o reunión para compartir tiempo juntos.",
-  "22": "Recurso creativo: un link a una herramienta o plantilla que inspire proyectos pequeños.",
-  "23": "Último empujón: una nota breve que prepara para la celebración final.",
-  "24": "Cierre cálido: gracias por acompañar este calendario — añade aquí tu despedida y contacto."
+  "LN-1010": {
+    "inicio": "Este conjunto de mensajes corresponde al código LN-1010. A lo largo de los próximos días se presentarán distintos mensajes de forma progresiva.",
+    "dias": {
+      "1": "Día 1. Inicio del recorrido del código LN-1010.",
+      "2": "Día 2. Cada avance aporta contexto.",
+      "3": "Día 3. La constancia forma parte del proceso.",
+      "4": "Día 4. Observar permite comprender mejor.",
+      "5": "Día 5. Las pausas también son progreso.",
+      "6": "Día 6. Mitad del recorrido alcanzada.",
+      "7": "Día 7. Las experiencias acumuladas generan aprendizaje.",
+      "8": "Día 8. Cada paso suma información.",
+      "9": "Día 9. El progreso continúa.",
+      "10": "Día 10. La continuidad aporta claridad.",
+      "11": "Día 11. El cierre se aproxima.",
+      "12": "Día 12. Fin del ciclo diario del código LN-1010."
+    },
+    "final": "Este conjunto de mensajes del código LN-1010 ha finalizado. Puedes tomar este cierre como una referencia para lo que sigue."
+  },
+
+  "SN-2020": {
+    "inicio": "Has activado el código SN-2020. Durante los siguientes días se mostrarán mensajes asociados a este conjunto.",
+    "dias": {
+      "1": "Día 1. Inicio del recorrido del código SN-2020.",
+      "2": "Día 2. Avanzar de forma constante es suficiente.",
+      "3": "Día 3. Cada iteración aporta valor.",
+      "4": "Día 4. No todo es inmediato, pero todo suma.",
+      "5": "Día 5. La regularidad facilita el avance.",
+      "6": "Día 6. Mitad del recorrido alcanzada.",
+      "7": "Día 7. Revisar lo aprendido mejora el resultado.",
+      "8": "Día 8. El enfoque constante genera resultados.",
+      "9": "Día 9. El recorrido continúa sin prisa.",
+      "10": "Día 10. La experiencia se consolida.",
+      "11": "Día 11. El final está cerca.",
+      "12": "Día 12. Fin del ciclo diario del código SN-2020."
+    },
+    "final": "El código SN-2020 ha concluido. Este mensaje marca el cierre del conjunto."
+  }
 }
