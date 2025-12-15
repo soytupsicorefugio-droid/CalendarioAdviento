@@ -67,7 +67,6 @@
 
     .day-box {
       position: absolute;
-      transform: translate(-50%, -50%);
       cursor: pointer;
       perspective: 1000px;
     }
@@ -85,10 +84,6 @@
       width: 100%;
       height: 100%;
       background: transparent;
-      backdrop-filter: none;
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
       transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       display: flex;
       align-items: center;
@@ -98,24 +93,18 @@
     }
 
     .day-number {
-      position: relative;
       font-size: 32px;
       font-weight: bold;
       color: white;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 255, 255, 0.4);
-      z-index: 1;
-      background: transparent;
-      backdrop-filter: none;
       padding: 8px 15px;
       border-radius: 50%;
       min-width: 50px;
       text-align: center;
-      box-shadow: none;
-      border: none;
       display: none;
     }
 
-    /* Caja abierta - se encoge hacia el centro y desaparece */
+    /* Caja abierta */
     .day-box.opened .box-lid {
       transform: scale(0) rotate(180deg);
       opacity: 0;
@@ -133,17 +122,6 @@
     /* Estado bloqueado */
     .day-box.locked {
       cursor: not-allowed;
-    }
-
-    .day-box.locked .box-lid {
-      background: transparent;
-      border-color: transparent;
-      backdrop-filter: none;
-      box-shadow: none;
-    }
-
-    .day-box.locked .day-number {
-      display: none;
     }
 
     .day-box.locked:hover .box-lid {
@@ -167,6 +145,40 @@
       padding: 5px;
     }
 
+    #tip-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 130px;
+      height: 130px;
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 50%;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      padding: 0;
+    }
+
+    #tip-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+      background: rgba(255, 255, 255, 1);
+    }
+
+    #tip-button svg {
+      width: 70px;
+      height: 70px;
+      filter: drop-shadow(0 2px 8px rgba(220, 38, 38, 0.3));
+    }
+
+    #tip-button:hover svg {
+      filter: drop-shadow(0 4px 12px rgba(220, 38, 38, 0.5));
+    }
+
     .progress-ring {
       position: absolute;
       top: 50%;
@@ -174,11 +186,6 @@
       transform: translate(-50%, -50%) rotate(-90deg);
       width: 120px;
       height: 120px;
-    }
-
-    .progress-ring-circle {
-      transition: stroke-dashoffset 0.5s ease;
-      stroke-linecap: round;
     }
 
     .progress-ring-circle-fill {
@@ -320,6 +327,28 @@
       transform: scale(1.05);
     }
 
+    .paypal-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 32px;
+      background-color: #0070ba;
+      color: white !important;
+      text-decoration: none !important;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .paypal-link:hover {
+      background-color: #005ea6;
+      transform: scale(1.05);
+      color: white !important;
+      text-decoration: none !important;
+    }
+
     .confetti {
       position: fixed;
       width: 10px;
@@ -341,17 +370,6 @@
       }
     }
 
-    @keyframes sparkleFall {
-      0% {
-        opacity: 1;
-        transform: translateY(-100vh) rotate(0deg);
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(100vh) rotate(360deg);
-      }
-    }
-
     .sparkle {
       position: fixed;
       width: 8px;
@@ -364,7 +382,18 @@
       animation: sparkleFall 2s linear forwards;
     }
 
-    /* Animación de apertura de caja - efecto visible y dramático */
+    @keyframes sparkleFall {
+      0% {
+        opacity: 1;
+        transform: translateY(-100vh) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+
+    /* Animación de apertura de caja */
     @keyframes lidFade {
       0% {
         opacity: 1;
@@ -383,7 +412,6 @@
       }
     }
 
-    /* Animación de brillo intenso y envolvente */
     @keyframes softGlow {
       0% {
         background: transparent;
@@ -403,7 +431,6 @@
       }
     }
 
-    /* Animación de borde brillante visible */
     @keyframes innerSparkle {
       0% {
         border: 1px solid transparent;
@@ -423,14 +450,82 @@
       }
     }
 
-    /* Clase para aplicar animación de apertura */
-    .day-box.opening {
-      animation: none;
-    }
-
     .day-box.opening .box-lid {
       animation: lidFade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), softGlow 1s ease-out, innerSparkle 1s ease-out;
       transform-origin: center center;
+    }
+
+    /* Modal de código */
+    #code-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    #code-modal.active {
+      display: flex;
+    }
+
+    .code-modal-content {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    .code-modal-content h2 {
+      color: #dc2626;
+      margin-bottom: 20px;
+    }
+
+    .code-modal-content input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 2px solid #d1d5db;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .code-modal-content input:focus {
+      outline: none;
+      border-color: #dc2626;
+    }
+
+    .code-modal-content button {
+      width: 100%;
+      padding: 12px;
+      background: #dc2626;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .code-modal-content button:hover {
+      background: #b91c1c;
+    }
+
+    #code-error {
+      color: #dc2626;
+      font-size: 14px;
+      margin-top: 10px;
+      min-height: 20px;
     }
 
     @media (max-width: 768px) {
@@ -445,6 +540,18 @@
         bottom: 15px;
         right: 15px;
         padding: 4px;
+      }
+
+      #tip-button {
+        width: 110px;
+        height: 110px;
+        bottom: 15px;
+        left: 15px;
+      }
+
+      #tip-button svg {
+        width: 60px;
+        height: 60px;
       }
 
       .progress-ring {
@@ -466,13 +573,11 @@
         min-width: 30px;
       }
 
-      /* Remover hover effects en touch devices */
       .day-box:not(.opened):hover .box-lid {
         transform: scale(1) !important;
         background: rgba(255, 255, 255, 0.12) !important;
       }
 
-      /* Active state para toques */
       .day-box:not(.opened):active .box-lid {
         transform: scale(0.95);
         background: rgba(255, 255, 255, 0.2);
@@ -484,12 +589,12 @@
         border-radius: 15px;
       }
 
-      .modal-title {
+      .modal-content h2 {
         font-size: 20px;
         margin-bottom: 15px;
       }
 
-      .modal-message {
+      .modal-content p {
         font-size: 14px;
         line-height: 1.5;
       }
@@ -497,216 +602,345 @@
   </style>
 </head>
 <body>
+  <!-- Modal de ingreso de código -->
+  <div id="code-modal">
+    <div class="code-modal-content">
+      <h2>🎄 Ingresa tu código</h2>
+      <input type="text" id="code-input" placeholder="Tu código aquí" maxlength="10" autofocus>
+      <button id="code-confirm">Confirmar</button>
+      <div id="code-error"></div>
+    </div>
+  </div>
+
+  <!-- Modal de mensaje del día -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <h2 id="modal-title"></h2>
+      <p id="modal-message"></p>
+      <button class="close-modal" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+
   <div id="calendar-container">
-    <img id="calendar-image" src="resources/1.png" alt="Calendario de Adviento">
-    
-    <div class="day-box" data-day="1" style="left: 14.6%; top: 21.3%; width: 15.4%; height: 10.7%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">1</span>
-        </div>
-      </div>
+    <img id="calendar-image" src="resources/3.png" alt="Calendario de Adviento">
+
+    <div class="day-box" data-day="1" style="left:10.17%; top:18.03%; width:26.00%; height:26.32%;">
+      <div class="box-container"><div class="box-lid"><span class="day-number">1</span></div></div>
     </div>
-    <div class="day-box" data-day="2" style="left: 32.9%; top: 23.0%; width: 15.6%; height: 14.2%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">2</span>
-        </div>
-      </div>
+    <div class="day-box" data-day="2" style="left:39.55%; top:17.69%; width:24.55%; height:17.12%;">
+      <div class="box-container"><div class="box-lid"><span class="day-number">2</span></div></div>
     </div>
-    <div class="day-box" data-day="3" style="left: 51.3%; top: 20.1%; width: 16.8%; height: 9.1%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">3</span>
-        </div>
-      </div>
+    <div class="day-box" data-day="3" style="left:66.86%; top:18.72%; width:25.33%; height:7.46%;">
+      <div class="box-container"><div class="box-lid"><span class="day-number">3</span></div></div>
     </div>
-    <div class="day-box" data-day="4" style="left: 69.4%; top: 22.5%; width: 14.7%; height: 13.8%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">4</span>
-        </div>
-      </div>
+    <div class="day-box" data-day="4" style="left:39.25%; top:38.43%; width:24.67%; height:12.96%;"> 
+      <div class="box-container"><div class="box-lid"><span class="day-number">4</span></div></div>
     </div>
-    <div class="day-box" data-day="5" style="left: 86.6%; top: 22.5%; width: 14.1%; height: 13.3%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">5</span>
-        </div>
-      </div>
+    <div class="day-box" data-day="5" style="left:67.30%; top:28.74%; width:25.78%; height:19.87%;">
+      <div class="box-container"><div class="box-lid"><span class="day-number">5</span></div></div>
     </div>
-    <div class="day-box" data-day="6" style="left: 14.3%; top: 33.2%; width: 15.6%; height: 8.1%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">6</span>
-        </div>
-      </div>
+    <div class="day-box" data-day="7" style="left:10.02%; top:61.81%; width:19.00%; height:16.57%;"> 
+      <div class="box-container"><div class="box-lid"><span class="day-number">7</span></div></div>
     </div>
-    <div class="day-box" data-day="7" style="left: 32.8%; top: 38.6%; width: 14.4%; height: 13.3%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">7</span>
-        </div>
-      </div>
+    <div class="day-box" data-day="11" style="left:32.52%; top:80.62%; width:34.44%; height:12.65%;"> 
+      <div class="box-container"><div class="box-lid"><span class="day-number">11</span></div></div>
     </div>
-    <div class="day-box" data-day="8" style="left: 50.8%; top: 33.3%; width: 15.4%; height: 14.0%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">8</span>
-        </div>
-      </div>
+    <div class="day-box" data-day="8" style="left:33.05%; top:54.12%; width:31.67%; height:22.78%;"> 
+      <div class="box-container"><div class="box-lid"><span class="day-number">8</span></div></div>
     </div>
-    <div class="day-box" data-day="9" style="left: 69.4%; top: 36.7%; width: 15.4%; height: 10.7%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">9</span>
-        </div>
-      </div>
+    <div class="day-box" data-day="9" style="left:68.34%; top:50.80%; width:24.78%; height:12.49%;"> 
+      <div class="box-container"><div class="box-lid"><span class="day-number">9</span></div></div>
     </div>
-    <div class="day-box" data-day="10" style="left: 87.0%; top: 37.9%; width: 14.3%; height: 13.4%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">10</span>
-        </div>
-      </div>
+    <div class="day-box" data-day="6" style="left:9.73%; top:46.38%; width:19.55%; height:12.88%;"> 
+      <div class="box-container"><div class="box-lid"><span class="day-number">6</span></div></div>
     </div>
-    <div class="day-box" data-day="11" style="left: 13.9%; top: 46.7%; width: 15.0%; height: 14.1%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">11</span>
-        </div>
-      </div>
+    <div class="day-box" data-day="10" style="left:9.64%; top:80.73%; width:21.22%; height:12.49%;">
+      <div class="box-container"><div class="box-lid"><span class="day-number">10</span></div></div>
     </div>
-    <div class="day-box" data-day="12" style="left: 32.4%; top: 54.1%; width: 14.4%; height: 13.4%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">12</span>
-        </div>
-      </div>
-    </div>
-    <div class="day-box" data-day="13" style="left: 50.4%; top: 49.1%; width: 14.2%; height: 13.6%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">13</span>
-        </div>
-      </div>
-    </div>
-    <div class="day-box" data-day="14" style="left: 69.4%; top: 51.6%; width: 15.3%; height: 14.1%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">14</span>
-        </div>
-      </div>
-    </div>
-    <div class="day-box" data-day="15" style="left: 87.0%; top: 53.3%; width: 14.1%; height: 13.3%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">15</span>
-        </div>
-      </div>
-    </div>
-    <div class="day-box" data-day="16" style="left: 13.9%; top: 63.2%; width: 15.2%; height: 14.5%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">16</span>
-        </div>
-      </div>
-    </div>
-    <div class="day-box" data-day="17" style="left: 32.4%; top: 66.8%; width: 15.2%; height: 7.9%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">17</span>
-        </div>
-      </div>
-    </div>
-    <div class="day-box" data-day="18" style="left: 50.3%; top: 63.0%; width: 14.4%; height: 10.4%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">18</span>
-        </div>
-      </div>
-    </div>
-    <div class="day-box" data-day="19" style="left: 68.4%; top: 65.2%; width: 15.9%; height: 8.2%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">19</span>
-        </div>
-      </div>
-    </div>
-    <div class="day-box" data-day="20" style="left: 86.3%; top: 65.9%; width: 15.7%; height: 8.4%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">20</span>
-        </div>
-      </div>
-    </div>
-    <div class="day-box" data-day="21" style="left: 13.6%; top: 77.5%; width: 15.3%; height: 10.9%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">21</span>
-        </div>
-      </div>
-    </div>
-    <div class="day-box" data-day="22" style="left: 32.4%; top: 79.5%; width: 14.9%; height: 13.7%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">22</span>
-        </div>
-      </div>
-    </div>
-    <div class="day-box" data-day="23" style="left: 49.9%; top: 75.4%; width: 14.9%; height: 10.6%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">23</span>
-        </div>
-      </div>
-    </div>
-    <div class="day-box" data-day="24" style="left: 77.0%; top: 80.9%; width: 31.8%; height: 17.1%;">
-      <div class="box-container">
-        <div class="box-lid">
-          <span class="day-number">24</span>
-        </div>
-      </div>
+    <div class="day-box" data-day="12" style="left:68.80%; top:65.76%; width:25.89%; height:27.57%;">
+      <div class="box-container"><div class="box-lid"><span class="day-number">12</span></div></div>
     </div>
   </div>
 
   <div id="counter">
     <svg class="progress-ring" width="120" height="120" viewBox="0 0 120 120">
-      <circle class="progress-ring-circle" stroke="#d1d5db" fill="none" stroke-width="5" r="50" cx="60" cy="60" />
+      <circle stroke="#d1d5db" fill="none" stroke-width="5" r="50" cx="60" cy="60" />
       <circle class="progress-ring-circle-fill" stroke="#dc2626" fill="none" stroke-width="5" r="50" cx="60" cy="60" stroke-dasharray="314.159" stroke-dashoffset="314.159" />
     </svg>
     <div class="counter-text">
-      <span id="count">0</span> / 24
+      <span id="count">0</span> / 12
     </div>
   </div>
 
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <h2 id="modal-title">🎁 ¡Día 1!</h2>
-      <p id="modal-message">¡Has abierto el primer día del calendario de adviento!</p>
-      <button class="close-modal" onclick="closeModal()">Cerrar</button>
-    </div>
-  </div>
+  <button id="tip-button" onclick="showTipModal()">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Lazo del regalo -->
+      <path d="M12 5.5C12 5.5 10.5 4 9 4C7.5 4 6.5 5 6.5 6.5C6.5 8 8 9 9.5 9H12M12 5.5C12 5.5 13.5 4 15 4C16.5 4 17.5 5 17.5 6.5C17.5 8 16 9 14.5 9H12M12 5.5V9" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      
+      <!-- Caja del regalo -->
+      <rect x="4" y="9" width="16" height="4" rx="1" fill="#dc2626"/>
+      <rect x="3" y="13" width="18" height="9" rx="1" fill="#fbbf24"/>
+      
+      <!-- Cinta vertical -->
+      <rect x="11" y="9" width="2" height="13" fill="#dc2626"/>
+      
+      <!-- Detalles decorativos -->
+      <circle cx="7" cy="16" r="0.5" fill="#dc2626" opacity="0.5"/>
+      <circle cx="17" cy="16" r="0.5" fill="#dc2626" opacity="0.5"/>
+      <circle cx="7" cy="19" r="0.5" fill="#dc2626" opacity="0.5"/>
+      <circle cx="17" cy="19" r="0.5" fill="#dc2626" opacity="0.5"/>
+    </svg>
+  </button>
 
   <script>
     const openedDays = new Set();
-    let dayMessages = {};
-
     const OPENED_DAYS_KEY = 'advent_opened_days';
+    let MESSAGES_CONFIG = {};
+    let ACTIVE_CODE = null;
+    let snowflakesStarted = false;
 
-    // Cargar mensajes desde archivo externo
-    async function loadMessages() {
-      try {
-        const response = await fetch('messages.json');
-        dayMessages = await response.json();
-      } catch (error) {
-        console.error('Error al cargar los mensajes:', error);
-        dayMessages = {};
+    // Cargar configuración de mensajes
+    fetch('messages.json')
+      .then(res => res.json())
+      .then(data => {
+        MESSAGES_CONFIG = data;
+        console.log('Mensajes cargados:', MESSAGES_CONFIG);
+        initApp();
+      })
+      .catch(err => {
+        console.error('Error cargando messages.json', err);
+        initApp();
+      });
+
+    function initApp() {
+      const savedCode = localStorage.getItem('calendarCode');
+
+      // Iniciar nieve siempre
+      if (!snowflakesStarted) {
+        createSnowflakes();
+        snowflakesStarted = true;
+      }
+
+      if (!savedCode || !MESSAGES_CONFIG[savedCode]) {
+        localStorage.removeItem('calendarCode');
+        showCodeModal();
+        return;
+      }
+
+      ACTIVE_CODE = savedCode;
+      console.log('Código activo:', ACTIVE_CODE);
+      initCalendar();
+    }
+
+    function showCodeModal() {
+      const modal = document.getElementById('code-modal');
+      const input = document.getElementById('code-input');
+      const error = document.getElementById('code-error');
+      const btn = document.getElementById('code-confirm');
+
+      modal.classList.add('active');
+      input.value = '';
+      error.textContent = '';
+
+      // Focus en el input
+      setTimeout(() => input.focus(), 100);
+
+      // Permitir enter para confirmar
+      input.onkeypress = (e) => {
+        if (e.key === 'Enter') {
+          btn.click();
+        }
+      };
+
+      btn.onclick = () => {
+        const code = input.value.trim().toUpperCase();
+        console.log('Código ingresado:', code);
+        console.log('Códigos disponibles:', Object.keys(MESSAGES_CONFIG));
+
+        if (!code) {
+          error.textContent = 'Por favor ingresa un código';
+          return;
+        }
+
+        if (!MESSAGES_CONFIG[code]) {
+          error.textContent = 'Código inválido.';
+          return;
+        }
+
+        // Guardar y activar
+        localStorage.setItem('calendarCode', code);
+        ACTIVE_CODE = code;
+        console.log('Código guardado:', ACTIVE_CODE);
+
+        // Verificar si es primera activación
+        const firstActivationKey = `first_activation_${code}`;
+        const isFirstTime = !localStorage.getItem(firstActivationKey);
+
+        // Ocultar modal
+        modal.classList.remove('active');
+        
+        // Inicializar calendario
+        initCalendar();
+        updateCounter();
+
+        // Mostrar mensaje de inicio si es primera vez
+        if (isFirstTime) {
+          localStorage.setItem(firstActivationKey, 'true');
+          setTimeout(() => {
+            showWelcomeModal();
+          }, 500);
+        }
+      };
+    }
+
+    function initCalendar() {
+      const boxes = document.querySelectorAll('.day-box');
+      const colombiaTime = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Bogota' }));
+      const currentDay = colombiaTime.getDate();
+
+      loadOpenedDays();
+
+      boxes.forEach(box => {
+        const day = parseInt(box.getAttribute('data-day'));
+        
+        if (openedDays.has(day)) {
+          box.classList.add('opened');
+        }
+
+        if (day > currentDay) {
+          box.classList.add('locked');
+        } else {
+          box.addEventListener('click', function() {
+            if (openedDays.has(day)) {
+              openedDays.delete(day);
+              this.classList.remove('opened');
+            } else {
+              openedDays.add(day);
+              this.classList.add('opened');
+              this.classList.add('opening');
+              
+              setTimeout(() => createSparkles(), 100);
+              setTimeout(() => createConfetti(), 300);
+              setTimeout(() => this.classList.remove('opening'), 1000);
+              setTimeout(() => showModal(day), 2000);
+            }
+            
+            updateCounter();
+            saveOpenedDays();
+          });
+        }
+      });
+
+      updateCounter();
+    }
+
+    function showModal(day) {
+      const messages = MESSAGES_CONFIG[ACTIVE_CODE];
+      
+      if (!messages || !messages.dias) {
+        console.error('No se encontraron mensajes para el código:', ACTIVE_CODE);
+        return;
+      }
+
+      const title = `🎁 ¡Día ${day}!`;
+      const message = messages.dias[day] || 'Sorpresa del día';
+
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-message').innerHTML = linkify(escapeHtml(message));
+      document.getElementById('modal').classList.add('active');
+
+      // Marcar si es el día 12 para mostrar mensaje final al cerrar
+      document.getElementById('modal').dataset.isDay12 = (day === 12) ? 'true' : 'false';
+    }
+
+    function showWelcomeModal() {
+      const messages = MESSAGES_CONFIG[ACTIVE_CODE];
+      
+      if (!messages || !messages.inicio) {
+        console.error('No se encontró mensaje de inicio para el código:', ACTIVE_CODE);
+        return;
+      }
+
+      const title = '🎄 ¡Bienvenido!';
+      const message = messages.inicio;
+
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-message').innerHTML = linkify(escapeHtml(message));
+      document.getElementById('modal').classList.add('active');
+    }
+
+    function showFinalModal() {
+      const messages = MESSAGES_CONFIG[ACTIVE_CODE];
+      
+      if (!messages || !messages.final) {
+        console.error('No se encontró mensaje final para el código:', ACTIVE_CODE);
+        return;
+      }
+
+      const title = '🎉 ¡Felicitaciones!';
+      const message = messages.final;
+
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-message').innerHTML = linkify(escapeHtml(message));
+      document.getElementById('modal').classList.add('active');
+    }
+
+    function showTipModal() {
+      const title = '💝 Un regalo para ti';
+      const message = `Como tu terapeuta, he preparado este calendario de adviento como un regalo especial para ti. Cada día tiene un mensaje pensado con cariño.
+      
+Si este regalo te ha hecho sentir bien y deseas corresponder de alguna manera, puedes invitarme a un café. Tu apoyo significa mucho y me ayuda a seguir creando experiencias especiales para mis pacientes.
+
+¡Gracias por permitirme acompañarte en tu proceso! ❤️`;
+
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-message').innerHTML = linkify(escapeHtml(message)) + 
+        '<br><a href="https://www.paypal.me/PsiGinaRodriguez" target="_blank" rel="noopener noreferrer" class="paypal-link">☕ Invítame un café</a>';
+      document.getElementById('modal').classList.add('active');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      const isDay12 = modal.dataset.isDay12 === 'true';
+      
+      modal.classList.remove('active');
+      modal.dataset.isDay12 = 'false';
+
+      // Si era el día 12 y tiene 12 cajas abiertas, mostrar mensaje final
+      if (isDay12 && openedDays.size === 12) {
+        const completionKey = `completion_${ACTIVE_CODE}`;
+        const alreadyShown = localStorage.getItem(completionKey);
+        
+        if (!alreadyShown) {
+          localStorage.setItem(completionKey, 'true');
+          setTimeout(() => {
+            showFinalModal();
+          }, 800);
+        }
       }
     }
 
-    function getCurrentDay() {
-      return 24;
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s]));
+    }
+
+    function linkify(text) {
+      if (!text) return '';
+      
+      const spotifyRegex = /(https?:\/\/open\.spotify\.com\/track\/[^\s"'<>]+)/gi;
+      let result = text.replace(spotifyRegex, url => {
+        const clean = url.replace(/[\.,;:!\)\]]+$/,'');
+        return `<a href="${clean}" target="_blank" rel="noopener noreferrer">🎵 Escúchame</a>`;
+      });
+      
+      const otherUrlRegex = /(https?:\/\/[^\s"'<>]+)/gi;
+      result = result.replace(otherUrlRegex, url => {
+        if (url.includes('spotify')) return url;
+        const clean = url.replace(/[\.,;:!\)\]]+$/,'');
+        return `<a href="${clean}" target="_blank" rel="noopener noreferrer">🔗 Abre esto</a>`;
+      });
+      
+      return result;
     }
 
     function createConfetti() {
@@ -716,7 +950,6 @@
         setTimeout(() => {
           const confetti = document.createElement('div');
           confetti.className = 'confetti';
-          // Posición aleatoria en ancho pero desde arriba
           confetti.style.left = Math.random() * 100 + '%';
           confetti.style.top = '-20px';
           confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
@@ -726,33 +959,45 @@
           confetti.style.animationDuration = (Math.random() * 1.5 + 2.5) + 's';
           document.body.appendChild(confetti);
           
-          setTimeout(() => {
-            if (confetti.parentNode) confetti.remove();
-          }, 4500);
+          setTimeout(() => confetti.remove(), 4500);
         }, i * 25);
       }
     }
 
-    function createSparkles(x, y) {
+    function createSparkles() {
       for (let i = 0; i < 12; i++) {
         const sparkle = document.createElement('div');
         sparkle.className = 'sparkle';
-        
-        // Posición aleatoria en el ancho, pero desde arriba
         sparkle.style.left = (Math.random() * 40 + 30) + '%';
         sparkle.style.top = '-50px';
-        
-        // Delay aleatorio
         sparkle.style.animationDelay = (Math.random() * 0.2) + 's';
-        
         document.body.appendChild(sparkle);
         
-        // Limpiar después de animación
-        setTimeout(() => {
-          if (sparkle.parentNode) {
-            sparkle.remove();
-          }
-        }, 2500);
+        setTimeout(() => sparkle.remove(), 2500);
+      }
+    }
+
+    function createSnowflakes() {
+      const snowflakeChars = ['❄', '❅', '❆', '•', '◦'];
+      
+      function addSnowflake() {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        snowflake.innerHTML = snowflakeChars[Math.floor(Math.random() * snowflakeChars.length)];
+        snowflake.style.left = Math.random() * 100 + '%';
+        snowflake.style.fontSize = (Math.random() * 15 + 10) + 'px';
+        
+        const duration = Math.random() * 5 + 5;
+        snowflake.style.animation = `snowfall ${duration}s linear`;
+        snowflake.style.opacity = Math.random() * 0.6 + 0.4;
+        
+        document.body.appendChild(snowflake);
+        setTimeout(() => snowflake.remove(), duration * 1000);
+      }
+      
+      setInterval(addSnowflake, 80);
+      for (let i = 0; i < 50; i++) {
+        setTimeout(addSnowflake, i * 50);
       }
     }
 
@@ -764,160 +1009,17 @@
       const data = localStorage.getItem(OPENED_DAYS_KEY);
       if (data) {
         try {
-          const arr = JSON.parse(data);
-          arr.forEach(day => openedDays.add(Number(day)));
+          JSON.parse(data).forEach(day => openedDays.add(Number(day)));
         } catch {}
       }
-    }
-
-    function initCalendar() {
-      const boxes = document.querySelectorAll('.day-box');
-      const currentDay = 3; // 3 de diciembre
-
-      // Restaurar progreso visual
-      loadOpenedDays();
-      boxes.forEach(box => {
-        const day = parseInt(box.getAttribute('data-day'));
-        if (openedDays.has(day)) {
-          box.classList.add('opened');
-        }
-        // Bloquear días futuros
-        if (day > currentDay) {
-          box.classList.add('locked');
-          box.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-          });
-        } else {
-          box.addEventListener('click', function(e) {
-            if (openedDays.has(day)) {
-              openedDays.delete(day);
-              this.classList.remove('opened');
-            } else {
-              openedDays.add(day);
-              this.classList.add('opened');
-              this.classList.add('opening');
-              
-              const rect = this.getBoundingClientRect();
-              
-              // Mostrar sparkles durante la apertura
-              setTimeout(() => {
-                createSparkles(rect.left + rect.width / 2, rect.top + rect.height / 2);
-              }, 100);
-              
-              // Confeti en el pico de la animación
-              setTimeout(() => {
-                createConfetti();
-              }, 300);
-              
-              // Remover clase opening después de la animación
-              setTimeout(() => {
-                this.classList.remove('opening');
-              }, 1000);
-              
-              // Abrir modal después de que los efectos terminen (más rápido)
-              setTimeout(() => {
-                showModal(day, `🎁 ¡Día ${day}!`, dayMessages[day] || '¡Sorpresa del día!');
-              }, 1000);
-            }
-            
-            updateCounter();
-            saveOpenedDays(); // Guardar progreso cada vez que cambia
-          });
-        }
-      });
-    }
-
-    function createSnowflakes() {
-      const snowflakeChars = ['❄', '❅', '❆', '•', '◦'];
-      
-      function addSnowflake() {
-        const snowflake = document.createElement('div');
-        snowflake.className = 'snowflake';
-        snowflake.innerHTML = snowflakeChars[Math.floor(Math.random() * snowflakeChars.length)];
-        
-        // Posición horizontal aleatoria
-        snowflake.style.left = Math.random() * 100 + '%';
-        
-        // Tamaño aleatorio
-        const size = Math.random() * 15 + 10;
-        snowflake.style.fontSize = size + 'px';
-        
-        // Duración aleatoria
-        const duration = Math.random() * 5 + 5;
-        snowflake.style.animation = `snowfall ${duration}s linear`;
-        
-        // Opacidad aleatoria
-        snowflake.style.opacity = Math.random() * 0.6 + 0.4;
-        
-        document.body.appendChild(snowflake);
-        
-        // Eliminar después de la animación
-        setTimeout(() => {
-          if (snowflake.parentNode) {
-            snowflake.remove();
-          }
-        }, duration * 1000);
-      }
-      
-      // Crear copos continuamente (más frecuente)
-      setInterval(addSnowflake, 80);
-      
-      // Crear muchos copos iniciales
-      for (let i = 0; i < 50; i++) {
-        setTimeout(addSnowflake, i * 50);
-      }
-    }
-
-    function showModal(day, title, message) {
-      document.getElementById('modal-title').textContent = title;
-
-      // Escapar HTML simple para evitar inyección
-      function escapeHtml(str) {
-        return String(str).replace(/[&<>\"]/g, function(s) {
-          return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s]);
-        });
-      }
-
-      // Convertir URLs en enlaces seguros
-      function linkify(text) {
-        if (!text) return '';
-        const escaped = escapeHtml(text);
-        
-        // Reemplazar URLs de Spotify con texto amigable
-        const spotifyRegex = /(https?:\/\/open\.spotify\.com\/track\/[^\s"'<>]+)/gi;
-        let result = escaped.replace(spotifyRegex, function(url) {
-          const clean = url.replace(/[\.,;:!\)\]]+$/,'');
-          return `<a href="${clean}" target="_blank" rel="noopener noreferrer">🎵 Escúchame</a>`;
-        });
-        
-        // Reemplazar otras URLs (si las hay) con texto genérico
-        const otherUrlRegex = /(https?:\/\/[^\s"'<>]+)/gi;
-        result = result.replace(otherUrlRegex, function(url) {
-          // Si ya fue reemplazada por Spotify, saltar
-          if (url.includes('spotify')) return url;
-          const clean = url.replace(/[\.,;:!\)\]]+$/,'');
-          return `<a href="${clean}" target="_blank" rel="noopener noreferrer">🔗 Abre esto</a>`;
-        });
-        
-        return result;
-      }
-
-      document.getElementById('modal-message').innerHTML = linkify(message);
-      document.getElementById('modal').classList.add('active');
-    }
-
-    function closeModal() {
-      document.getElementById('modal').classList.remove('active');
     }
 
     function updateCounter() {
       const count = openedDays.size;
       document.getElementById('count').textContent = count;
       
-      // Calculate progress (0-24 days)
-      const progress = count / 24;
-      const circumference = 2 * Math.PI * 50; // radius = 50
+      const progress = count / 12;
+      const circumference = 2 * Math.PI * 50;
       const offset = circumference * (1 - progress);
       
       const progressCircle = document.querySelector('.progress-ring-circle-fill');
@@ -927,16 +1029,7 @@
     }
 
     document.getElementById('modal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeModal();
-      }
-    });
-
-    // Cargar mensajes e inicializar el calendario
-    loadMessages().then(() => {
-      initCalendar();
-      createSnowflakes();
-      updateCounter();
+      if (e.target === this) closeModal();
     });
   </script>
 </body>
