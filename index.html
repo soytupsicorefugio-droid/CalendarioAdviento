@@ -290,9 +290,16 @@
     .modal-content p {
       color: #374151;
       font-size: 18px;
-      line-height: 1.6;
+      line-height: 1.8;
       position: relative;
       z-index: 1;
+      text-align: center;
+      white-space: pre-line;
+    }
+
+    .modal-content p strong {
+      color: #dc2626;
+      font-weight: 700;
     }
 
     .modal-content a {
@@ -590,13 +597,13 @@
       }
 
       .modal-content h2 {
-        font-size: 20px;
+        font-size: 22px;
         margin-bottom: 15px;
       }
 
       .modal-content p {
-        font-size: 14px;
-        line-height: 1.5;
+        font-size: 15px;
+        line-height: 1.7;
       }
     }
   </style>
@@ -606,6 +613,7 @@
   <div id="code-modal">
     <div class="code-modal-content">
       <h2>🎄 Ingresa tu código</h2>
+      <p style="color: #6b7280; margin-bottom: 20px; font-size: 14px;">Ejemplo: LN-1010 o SN-2020</p>
       <input type="text" id="code-input" placeholder="Tu código aquí" maxlength="10" autofocus>
       <button id="code-confirm">Confirmar</button>
       <div id="code-error"></div>
@@ -639,11 +647,11 @@
     <div class="day-box" data-day="5" style="left:67.30%; top:28.74%; width:25.78%; height:19.87%;">
       <div class="box-container"><div class="box-lid"><span class="day-number">5</span></div></div>
     </div>
-    <div class="day-box" data-day="7" style="left:10.02%; top:61.81%; width:19.00%; height:16.57%;"> 
-      <div class="box-container"><div class="box-lid"><span class="day-number">7</span></div></div>
+    <div class="day-box" data-day="6" style="left:10.02%; top:61.81%; width:19.00%; height:16.57%;"> 
+      <div class="box-container"><div class="box-lid"><span class="day-number">6</span></div></div>
     </div>
-    <div class="day-box" data-day="11" style="left:32.52%; top:80.62%; width:34.44%; height:12.65%;"> 
-      <div class="box-container"><div class="box-lid"><span class="day-number">11</span></div></div>
+    <div class="day-box" data-day="7" style="left:32.52%; top:80.62%; width:34.44%; height:12.65%;"> 
+      <div class="box-container"><div class="box-lid"><span class="day-number">7</span></div></div>
     </div>
     <div class="day-box" data-day="8" style="left:33.05%; top:54.12%; width:31.67%; height:22.78%;"> 
       <div class="box-container"><div class="box-lid"><span class="day-number">8</span></div></div>
@@ -651,11 +659,11 @@
     <div class="day-box" data-day="9" style="left:68.34%; top:50.80%; width:24.78%; height:12.49%;"> 
       <div class="box-container"><div class="box-lid"><span class="day-number">9</span></div></div>
     </div>
-    <div class="day-box" data-day="6" style="left:9.73%; top:46.38%; width:19.55%; height:12.88%;"> 
-      <div class="box-container"><div class="box-lid"><span class="day-number">6</span></div></div>
-    </div>
-    <div class="day-box" data-day="10" style="left:9.64%; top:80.73%; width:21.22%; height:12.49%;">
+    <div class="day-box" data-day="10" style="left:9.73%; top:46.38%; width:19.55%; height:12.88%;"> 
       <div class="box-container"><div class="box-lid"><span class="day-number">10</span></div></div>
+    </div>
+    <div class="day-box" data-day="11" style="left:9.64%; top:80.73%; width:21.22%; height:12.49%;">
+      <div class="box-container"><div class="box-lid"><span class="day-number">11</span></div></div>
     </div>
     <div class="day-box" data-day="12" style="left:68.80%; top:65.76%; width:25.89%; height:27.57%;">
       <div class="box-container"><div class="box-lid"><span class="day-number">12</span></div></div>
@@ -709,6 +717,41 @@
       })
       .catch(err => {
         console.error('Error cargando messages.json', err);
+        // Usar configuración por defecto si falla
+        MESSAGES_CONFIG = {
+          "LN-1010": {
+            "dias": {
+              "1": "Día 1. Inicio del recorrido del código LN-1010.",
+              "2": "Día 2. Cada avance aporta contexto.",
+              "3": "Día 3. La constancia forma parte del proceso.",
+              "4": "Día 4. Observar permite comprender mejor.",
+              "5": "Día 5. Las pausas también son progreso.",
+              "6": "Día 6. Mitad del recorrido alcanzada.",
+              "7": "Día 7. Las experiencias acumuladas generan aprendizaje.",
+              "8": "Día 8. Cada paso suma información.",
+              "9": "Día 9. El progreso continúa.",
+              "10": "Día 10. La continuidad aporta claridad.",
+              "11": "Día 11. El cierre se aproxima.",
+              "12": "Día 12. Fin del ciclo diario del código LN-1010."
+            }
+          },
+          "SN-2020": {
+            "dias": {
+              "1": "Día 1. Inicio del recorrido del código SN-2020.",
+              "2": "Día 2. Avanzar de forma constante es suficiente.",
+              "3": "Día 3. Cada iteración aporta valor.",
+              "4": "Día 4. No todo es inmediato, pero todo suma.",
+              "5": "Día 5. La regularidad facilita el avance.",
+              "6": "Día 6. Mitad del recorrido alcanzada.",
+              "7": "Día 7. Revisar lo aprendido mejora el resultado.",
+              "8": "Día 8. El enfoque constante genera resultados.",
+              "9": "Día 9. El recorrido continúa sin prisa.",
+              "10": "Día 10. La experiencia se consolida.",
+              "11": "Día 11. El final está cerca.",
+              "12": "Día 12. Fin del ciclo diario del código SN-2020."
+            }
+          }
+        };
         initApp();
       });
 
@@ -763,7 +806,7 @@
         }
 
         if (!MESSAGES_CONFIG[code]) {
-          error.textContent = 'Código inválido.';
+          error.textContent = 'Código inválido. Intenta con LN-1010 o SN-2020';
           return;
         }
 
@@ -846,7 +889,9 @@
       const message = messages.dias[day] || 'Sorpresa del día';
 
       document.getElementById('modal-title').textContent = title;
-      document.getElementById('modal-message').innerHTML = linkify(escapeHtml(message));
+      // Reemplazar </br> por saltos de línea reales y aplicar formato de negritas
+      const formattedMessage = message.replace(/<\/br>/g, '\n');
+      document.getElementById('modal-message').innerHTML = formatBold(linkify(escapeHtml(formattedMessage)));
       document.getElementById('modal').classList.add('active');
 
       // Marcar si es el día 12 para mostrar mensaje final al cerrar
@@ -865,7 +910,9 @@
       const message = messages.inicio;
 
       document.getElementById('modal-title').textContent = title;
-      document.getElementById('modal-message').innerHTML = linkify(escapeHtml(message));
+      // Reemplazar </br> por saltos de línea reales y aplicar formato de negritas
+      const formattedMessage = message.replace(/<\/br>/g, '\n');
+      document.getElementById('modal-message').innerHTML = formatBold(linkify(escapeHtml(formattedMessage)));
       document.getElementById('modal').classList.add('active');
     }
 
@@ -881,7 +928,9 @@
       const message = messages.final;
 
       document.getElementById('modal-title').textContent = title;
-      document.getElementById('modal-message').innerHTML = linkify(escapeHtml(message));
+      // Reemplazar </br> por saltos de línea reales y aplicar formato de negritas
+      const formattedMessage = message.replace(/<\/br>/g, '\n');
+      document.getElementById('modal-message').innerHTML = formatBold(linkify(escapeHtml(formattedMessage)));
       document.getElementById('modal').classList.add('active');
     }
 
@@ -895,7 +944,7 @@ Si este regalo te ha hecho sentir bien y deseas corresponder de alguna manera, p
 
       document.getElementById('modal-title').textContent = title;
       document.getElementById('modal-message').innerHTML = linkify(escapeHtml(message)) + 
-        '<br><a href="https://www.paypal.me/PsiGinaRodriguez" target="_blank" rel="noopener noreferrer" class="paypal-link">☕ Invítame un café</a>';
+        '<br><a href="https://www.paypal.com/tu-enlace-de-paypal" target="_blank" rel="noopener noreferrer" class="paypal-link">☕ Invítame un café</a>';
       document.getElementById('modal').classList.add('active');
     }
 
@@ -922,6 +971,11 @@ Si este regalo te ha hecho sentir bien y deseas corresponder de alguna manera, p
 
     function escapeHtml(str) {
       return String(str).replace(/[&<>"]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s]));
+    }
+
+    function formatBold(text) {
+      // Convertir **texto** a <strong>texto</strong>
+      return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     }
 
     function linkify(text) {
